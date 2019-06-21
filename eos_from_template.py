@@ -2,7 +2,7 @@
 
 import pickle
 from openpyxl import load_workbook
-from openpyxl.styles import Font
+
 
 # load data from piclk
 with open(r"K:\Links\2020\Options\options.pickle", "rb") as file:
