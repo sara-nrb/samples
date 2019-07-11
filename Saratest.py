@@ -3,8 +3,6 @@
 import pickle
 
 # load data from piclk
-with open(r"K:\Links\2020\Options\options.pickle", "rb") as file:
-    options =  pickle.load(file)
 
 """
 output some part information to the screen
