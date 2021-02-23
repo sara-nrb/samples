@@ -92,12 +92,10 @@ class ExcelDocument(object):
 	Example: column 89, row 90 yields "CK90"
     """
     output = str(row)
-    col = col
     while True:
       col -= 1
-      digit = col % 26
-      output = chr(65 + digit) + output
-      col = int((col - digit) / 26)
+      output = chr(65 + col % 26) + output
+      col = int(col / 26)
       if col == 0:
         break
     return output    
