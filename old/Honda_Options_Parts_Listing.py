@@ -5,7 +5,7 @@ from openpyxl.styles import PatternFill, Border, Side, Alignment, Protection, Fo
 
 
 # load data from piclk
-with open(r"K:\Links\2020\Options\options.pickle", "rb") as file:
+with open(r"K:\Links\2021\Honda Rigging\honda rigging.pickle", "rb") as file:
 	options =  pickle.load(file)
 
 lenghts = [
@@ -136,4 +136,4 @@ for length in lenghts:
 				ws.cell(row = row, column = 9).value = "=SUM(G" + str(row) + "+H" + str(row) + ")"
 				ws.cell(row = row, column = 9).number_format = '$#,##0.00;[Red]-$#,##0.00'
 		
-wb.save(r"output\Boat Options Parts Listing.xlsx")
+wb.save(r"output\Honda Options Parts Listing.xlsx")

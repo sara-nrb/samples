@@ -19,20 +19,23 @@ import os
 
 """
 
-path = r'K:\Links\2020\Options\Contribution Margin Testing'
+path = r'K:\Links\2021\Yamaha Rigging'
 excel = ExcelDocument()
 
 
 
 for filename in os.listdir(path):
-    
+    if filename.endswith(r'.xlsx'):
+
         excel.open(path + "\\" + filename, 3) # open file and update links
         excel.set_visible(False)
         excel.display_alerts(False)
-	
-        excel.set_value("C9", "=IF(MIN(M5:CO5)<ABS(MAX(M5:CO5)),MIN(M5:CO5),MIN(M5:CO5))")
-	
+    
+        excel.set_value("D12", "18")
+        excel.set_value("M1", "18")
+        
         excel.save()
+        excel.close()
 
 excel.quit()
 

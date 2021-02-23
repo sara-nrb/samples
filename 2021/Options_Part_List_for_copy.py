@@ -5,7 +5,7 @@ from openpyxl.styles import PatternFill, Border, Side, Alignment, Protection, Fo
 
 
 # load data from piclk
-with open(r"K:\Links\2020\Honda Rigging\honda rigging.pickle", "rb") as file:
+with open(r"K:\Links\2021\Options\Options.pickle", "rb") as file:
 	options =  pickle.load(file)
 
 lenghts = [
@@ -23,26 +23,6 @@ lenghts = [
 	"35",
 ]
 
-kill=[]
-for option in options:
-	co = options.get(option+" - CO")
-	cr = options.get(option+" - CR")
-	if co:
-		kill.append(option+" - CO")
-		options[option]["OUTFITTING PARTS"] += co["OUTFITTING PARTS"]
-		options[option]["CANVAS PARTS"] += co["CANVAS PARTS"]
-		options[option]["PAINT PARTS"] += co["PAINT PARTS"]
-		options[option]["FABRICATION PARTS"] += co["FABRICATION PARTS"]
-	if cr:
-		kill.append(option+" - CR")
-		options[option]["OUTFITTING PARTS"] += cr["OUTFITTING PARTS"]
-		options[option]["CANVAS PARTS"] += cr["CANVAS PARTS"]
-		options[option]["PAINT PARTS"] += cr["PAINT PARTS"]
-		options[option]["FABRICATION PARTS"] += cr["FABRICATION PARTS"]
-
-for option in kill:
-	del options[option]
-
 wb = load_workbook(r"templates\CostingSheetTemplate.xlsx") # create new workbook
 
 for length in lenghts:
@@ -53,7 +33,7 @@ for length in lenghts:
 	row = 1
 	for option in sorted(options):
 
-		if len(options[option]["OUTFITTING PARTS"]) + len(options[option]["CANVAS PARTS"]) + len(options[option]["FABRICATION PARTS"]) + len(options[option]["PAINT PARTS"]) > 0:
+		if len(options[option]["TRAILER PARTS"]) + len(options[option]["OUTFITTING PARTS"]) + len(options[option]["CANVAS PARTS"]) + len(options[option]["FABRICATION PARTS"]) + len(options[option]["PAINT PARTS"]) > 0:
 
 				row += 1
 				ws.cell(row = row, column = 1).value = option + " Outfitting"
@@ -64,12 +44,13 @@ for length in lenghts:
 				row += 1
 				ws.cell(row = row, column = 1).value =  options[option]["OPTION NOTES"]
 				ws.cell(row = row, column = 1).font = bold
+
 		if len(options[option]["OUTFITTING NOTES"]) > 0:
 				row += 1
 				ws.cell(row = row, column = 1).value =  options[option]["OUTFITTING NOTES"]
 				ws.cell(row = row, column = 1).font = blue
-		if len(options[option]["OUTFITTING PARTS"]) + len(options[option]["CANVAS PARTS"]) > 0:
-			rigging = options[option]["OUTFITTING PARTS"] + options[option]["CANVAS PARTS"]
+		if len(options[option]["OUTFITTING PARTS"]) + len(options[option]["CANVAS PARTS"]) + len(options[option]["TRAILER PARTS"]) > 0:
+			rigging = options[option]["OUTFITTING PARTS"] + options[option]["CANVAS PARTS"] + options[option]["TRAILER PARTS"]
 			for item in rigging:
 			
 				row += 1
@@ -78,15 +59,15 @@ for length in lenghts:
 				ws.cell(row = row, column = 2).value = item["VENDOR PART"]
 				ws.cell(row = row, column = 3).value = item["DESCRIPTION"]
 				ws.cell(row = row, column = 4).value = float(item["PRICE"])
-				ws.cell(row = row, column = 4).number_format = '$#,##0.00;[Red]-$#,##0.00'
+				ws.cell(row = row, column = 4).number_format = r'_($* #,##0.00_);_($* (#,##0.00);_($* "-"??_);_(@_)'
 				ws.cell(row = row, column = 5).value = item["UOM"]
 				ws.cell(row = row, column = 6).value = item[length + " QTY"]
-				ws.cell(row = row, column = 7).value = "=SUM(D" + str(row) + "*F" + str(row) + ")"
-				ws.cell(row = row, column = 7).number_format = '$#,##0.00;[Red]-$#,##0.00'
+				ws.cell(row = row, column = 7).value = "=SUM(F" + str(row) + "*D" + str(row) + ")"
+				ws.cell(row = row, column = 7).number_format = r'_($* #,##0.00_);_($* (#,##0.00);_($* "-"??_);_(@_)'
 				ws.cell(row = row, column = 8).value = 0
-				ws.cell(row = row, column = 8).number_format = '$#,##0.00;[Red]-$#,##0.00'
+				ws.cell(row = row, column = 8).number_format = r'_($* #,##0.00_);_($* (#,##0.00);_($* "-"??_);_(@_)'
 				ws.cell(row = row, column = 9).value = "=SUM(G" + str(row) + "+H" + str(row) + ")"
-				ws.cell(row = row, column = 9).number_format = '$#,##0.00;[Red]-$#,##0.00'
+				ws.cell(row = row, column = 9).number_format = r'_($* #,##0.00_);_($* (#,##0.00);_($* "-"??_);_(@_)'
 				
 		if len(options[option]["FABRICATION PARTS"]) > 0:
 				row += 1
@@ -102,15 +83,15 @@ for length in lenghts:
 				ws.cell(row = row, column = 2).value = item["VENDOR PART"]
 				ws.cell(row = row, column = 3).value = item["DESCRIPTION"]
 				ws.cell(row = row, column = 4).value = float(item["PRICE"])
-				ws.cell(row = row, column = 4).number_format = '$#,##0.00;[Red]-$#,##0.00'
+				ws.cell(row = row, column = 4).number_format = r'_($* #,##0.00_);_($* (#,##0.00);_($* "-"??_);_(@_)'
 				ws.cell(row = row, column = 5).value = item["UOM"]
 				ws.cell(row = row, column = 6).value = item[length + " QTY"]
-				ws.cell(row = row, column = 7).value = "=SUM(D" + str(row) + "*F" + str(row) + ")"
-				ws.cell(row = row, column = 7).number_format = '$#,##0.00;[Red]-$#,##0.00'
+				ws.cell(row = row, column = 7).value = "=SUM(F" + str(row) + "*D" + str(row) + ")"
+				ws.cell(row = row, column = 7).number_format = r'_($* #,##0.00_);_($* (#,##0.00);_($* "-"??_);_(@_)'
 				ws.cell(row = row, column = 8).value = 0
-				ws.cell(row = row, column = 8).number_format = '$#,##0.00;[Red]-$#,##0.00'
+				ws.cell(row = row, column = 8).number_format = r'_($* #,##0.00_);_($* (#,##0.00);_($* "-"??_);_(@_)'
 				ws.cell(row = row, column = 9).value = "=SUM(G" + str(row) + "+H" + str(row) + ")"
-				ws.cell(row = row, column = 9).number_format = '$#,##0.00;[Red]-$#,##0.00'
+				ws.cell(row = row, column = 9).number_format = r'_($* #,##0.00_);_($* (#,##0.00);_($* "-"??_);_(@_)'
 		
 		if len(options[option]["PAINT PARTS"]) > 0:
 				row += 1
@@ -126,14 +107,14 @@ for length in lenghts:
 				ws.cell(row = row, column = 2).value = item["VENDOR PART"]
 				ws.cell(row = row, column = 3).value = item["DESCRIPTION"]
 				ws.cell(row = row, column = 4).value = float(item["PRICE"])
-				ws.cell(row = row, column = 4).number_format = '$#,##0.00;[Red]-$#,##0.00'
+				ws.cell(row = row, column = 4).number_format = r'_($* #,##0.00_);_($* (#,##0.00);_($* "-"??_);_(@_)'
 				ws.cell(row = row, column = 5).value = item["UOM"]
 				ws.cell(row = row, column = 6).value = item[length + " QTY"]
-				ws.cell(row = row, column = 7).value = "=SUM(D" + str(row) + "*F" + str(row) + ")"
-				ws.cell(row = row, column = 7).number_format = '$#,##0.00;[Red]-$#,##0.00'
+				ws.cell(row = row, column = 7).value = "=SUM(F" + str(row) + "*D" + str(row) + ")"
+				ws.cell(row = row, column = 7).number_format = r'_($* #,##0.00_);_($* (#,##0.00);_($* "-"??_);_(@_)'
 				ws.cell(row = row, column = 8).value = 0
-				ws.cell(row = row, column = 8).number_format = '$#,##0.00;[Red]-$#,##0.00'
+				ws.cell(row = row, column = 8).number_format = r'_($* #,##0.00_);_($* (#,##0.00);_($* "-"??_);_(@_)'
 				ws.cell(row = row, column = 9).value = "=SUM(G" + str(row) + "+H" + str(row) + ")"
-				ws.cell(row = row, column = 9).number_format = '$#,##0.00;[Red]-$#,##0.00'
+				ws.cell(row = row, column = 9).number_format = r'_($* #,##0.00_);_($* (#,##0.00);_($* "-"??_);_(@_)'
 		
-wb.save(r"output\Honda Options Parts Listing.xlsx")
+wb.save(r"output\2021 Boat Options Parts Listing.xlsx")

@@ -4,7 +4,7 @@ from openpyxl.styles import PatternFill, Border, Side, Alignment, Protection, Fo
 import datetime
 
 # load data from piclk
-with open(r"K:\Links\2020\Options\options.pickle", "rb") as file:
+with open(r"K:\Links\2021\Options\options.pickle", "rb") as file:
 	options =  pickle.load(file)
 
 lenghts = [
@@ -63,9 +63,9 @@ for length in lenghts:
 				row += 1
 				ws.cell(row = row, column = 1).value =  options[option]["OPTION NOTES"]
 				ws.cell(row = row, column = 1).font = bold
-		if len(options[option]["OUTFITTING NOTES"]) > 0:
+		if len(str(options[option]["EOS OUTFITTING NOTES"])) > 0:
 				row += 1
-				ws.cell(row = row, column = 1).value =  options[option]["OUTFITTING NOTES"]
+				ws.cell(row = row, column = 1).value =  options[option]["EOS OUTFITTING NOTES"]
 				ws.cell(row = row, column = 1).font = blue
 		if len(options[option]["OUTFITTING PARTS"]) + len(options[option]["CANVAS PARTS"]) > 0:
 			rigging = options[option]["OUTFITTING PARTS"] + options[option]["CANVAS PARTS"]
@@ -143,7 +143,7 @@ for length in lenghts:
 		
 wb.save(r"output\Boat Options Parts Listing.xlsx")
 
-with open(r"K:\Links\2020\Yamaha Rigging\yamaha rigging.pickle", "rb") as file:
+with open(r"K:\Links\2021\Yamaha Rigging\yamaha rigging.pickle", "rb") as file:
 	options =  pickle.load(file)
 
 lenghts = [
@@ -202,9 +202,9 @@ for length in lenghts:
 				row += 1
 				ws.cell(row = row, column = 1).value =  options[option]["OPTION NOTES"]
 				ws.cell(row = row, column = 1).font = bold
-		if len(options[option]["OUTFITTING NOTES"]) > 0:
+		if len(str(options[option]["EOS OUTFITTING NOTES"])) > 0:
 				row += 1
-				ws.cell(row = row, column = 1).value =  options[option]["OUTFITTING NOTES"]
+				ws.cell(row = row, column = 1).value =  options[option]["EOS OUTFITTING NOTES"]
 				ws.cell(row = row, column = 1).font = blue
 		if len(options[option]["OUTFITTING PARTS"]) + len(options[option]["CANVAS PARTS"]) > 0:
 			rigging = options[option]["OUTFITTING PARTS"] + options[option]["CANVAS PARTS"]
@@ -282,7 +282,7 @@ for length in lenghts:
 		
 wb.save(r"output\Yamaha Options Parts Listing.xlsx")
 
-with open(r"K:\Links\2020\Mercury Rigging\mercury rigging.pickle", "rb") as file:
+with open(r"K:\Links\2021\Mercury Rigging\mercury rigging.pickle", "rb") as file:
 	options =  pickle.load(file)
 
 lenghts = [
@@ -341,7 +341,7 @@ for length in lenghts:
 				row += 1
 				ws.cell(row = row, column = 1).value =  options[option]["OPTION NOTES"]
 				ws.cell(row = row, column = 1).font = bold
-		if len(options[option]["OUTFITTING NOTES"]) > 0:
+		if len(str(options[option]["OUTFITTING NOTES"])) > 0:
 				row += 1
 				ws.cell(row = row, column = 1).value =  options[option]["OUTFITTING NOTES"]
 				ws.cell(row = row, column = 1).font = blue
@@ -421,7 +421,7 @@ for length in lenghts:
 		
 wb.save(r"output\Mercury Options Parts Listing.xlsx")
 
-with open(r"K:\Links\2020\Honda Rigging\honda rigging.pickle", "rb") as file:
+with open(r"K:\Links\2021\Honda Rigging\honda rigging.pickle", "rb") as file:
 	options =  pickle.load(file)
 
 lenghts = [
@@ -480,9 +480,9 @@ for length in lenghts:
 				row += 1
 				ws.cell(row = row, column = 1).value =  options[option]["OPTION NOTES"]
 				ws.cell(row = row, column = 1).font = bold
-		if len(options[option]["OUTFITTING NOTES"]) > 0:
+		if len(str(options[option]["EOS OUTFITTING NOTES"])) > 0:
 				row += 1
-				ws.cell(row = row, column = 1).value =  options[option]["OUTFITTING NOTES"]
+				ws.cell(row = row, column = 1).value =  options[option]["EOS OUTFITTING NOTES"]
 				ws.cell(row = row, column = 1).font = blue
 		if len(options[option]["OUTFITTING PARTS"]) + len(options[option]["CANVAS PARTS"]) > 0:
 			rigging = options[option]["OUTFITTING PARTS"] + options[option]["CANVAS PARTS"]
