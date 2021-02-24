@@ -108,6 +108,12 @@ venv.bak/
 # output directory
 output/
 
+<<<<<<< HEAD
 # ignore excel sheets
 *.xlsx
 *.xls
+=======
+# other
+*.xlsx
+*.xls
+>>>>>>> testing
